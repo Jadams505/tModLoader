@@ -566,7 +566,7 @@
  			if (Main.mouseItem.stack >= Main.mouseItem.maxStack && Main.mouseItem.type != 0)
  				continue;
  
-@@ -1396,23 +_,41 @@
+@@ -1396,23 +_,42 @@
  					SoundEngine.PlaySound(7);
  			}
  
@@ -576,6 +576,7 @@
 +			boughtItem.isAShopItem = false;
 +			boughtItem.stack = 1;
 +			boughtItem.OnCreated(new BuyItemCreationContext(Main.mouseItem, localPlayer.TalkNPC));
++			boughtItem.OnPurchase(boughtItem);
 +
  			if (Main.mouseItem.type == 0) {
 +				/*
