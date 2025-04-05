@@ -25,6 +25,7 @@ using Terraria.ModLoader.Default;
 using Terraria.ModLoader.Config;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Terraria.Map;
 
 namespace Terraria;
 
@@ -433,6 +434,15 @@ public partial class Main
 
 		UILinkPointNavigator.Shortcuts.BUILDERACCCOUNT = (endIndex - startIndex);
 	}
+
+	internal void DrawMapIcons_PotionOfReturnAppearAfterUsePosition(ref MapOverlayDrawContext context, ref string text) =>
+		DrawMapIcons_PotionOfReturnAppearAfterUsePosition(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+
+	internal void DrawMapIcons_PotionOfReturnHomePosition(ref MapOverlayDrawContext context, ref string text) =>
+		DrawMapIcons_PotionOfReturnHomePosition(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+
+	internal void DrawMapIcons_LastGolfballHit(ref MapOverlayDrawContext context, ref string text) =>
+		DrawMapIcons_LastGolfballHit(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
 
 	//Mirrors code used in UpdateTime
 	/// <summary>
