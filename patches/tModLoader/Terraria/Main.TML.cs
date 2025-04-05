@@ -436,13 +436,234 @@ public partial class Main
 	}
 
 	internal void DrawMapIcons_PotionOfReturnAppearAfterUsePosition(ref MapOverlayDrawContext context, ref string text) =>
-		DrawMapIcons_PotionOfReturnAppearAfterUsePosition(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+		DrawMapIcons_PotionOfReturnAppearAfterUsePosition(spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
 
 	internal void DrawMapIcons_PotionOfReturnHomePosition(ref MapOverlayDrawContext context, ref string text) =>
-		DrawMapIcons_PotionOfReturnHomePosition(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+		DrawMapIcons_PotionOfReturnHomePosition(spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
 
 	internal void DrawMapIcons_LastGolfballHit(ref MapOverlayDrawContext context, ref string text) =>
-		DrawMapIcons_LastGolfballHit(Main.spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+		DrawMapIcons_LastGolfballHit(spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+
+	internal void DrawMap_FullscreenMapNPCHeads(ref MapOverlayDrawContext context, ref string text)
+	{
+		float num = context.MapOffset.X + 10 * context.MapScale;
+		float num2 = context.MapOffset.Y + 10 * context.MapScale;
+		float num5 = context.MapScale;
+		float num109 = context.DrawScale;
+		byte b = byte.MaxValue;
+
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+		for (int num110 = 0; num110 < 200; num110++) {
+			if (npc[num110].active && npc[num110].townNPC) {
+				int headIndexSafe3 = TownNPCProfiles.GetHeadIndexSafe(npc[num110]);
+				if (headIndexSafe3 > 0) {
+					SpriteEffects dir3 = SpriteEffects.None;
+					if (npc[num110].direction > 0)
+						dir3 = SpriteEffects.FlipHorizontally;
+
+					float num111 = (npc[num110].position.X + (float)(npc[num110].width / 2)) / 16f * num5;
+					float num112 = (npc[num110].position.Y + npc[num110].gfxOffY + (float)(npc[num110].height / 2)) / 16f * num5;
+					num111 += num;
+					num112 += num2;
+					num111 -= 10f * num5;
+					num112 -= 10f * num5;
+					float num113 = num111 - (float)(TextureAssets.NpcHead[headIndexSafe3].Width() / 2) * num109;
+					float num114 = num112 - (float)(TextureAssets.NpcHead[headIndexSafe3].Height() / 2) * num109;
+					float num115 = num113 + (float)TextureAssets.NpcHead[headIndexSafe3].Width() * num109;
+					float num116 = num114 + (float)TextureAssets.NpcHead[headIndexSafe3].Height() * num109;
+					if ((float)mouseX >= num113 && (float)mouseX <= num115 && (float)mouseY >= num114 && (float)mouseY <= num116)
+						text = npc[num110].FullName;
+
+					DrawNPCHeadFriendly(npc[num110], b, num109, dir3, headIndexSafe3, num111, num112);
+				}
+			}
+
+			if (!npc[num110].active || npc[num110].GetBossHeadTextureIndex() == -1)
+				continue;
+
+			float bossHeadRotation3 = npc[num110].GetBossHeadRotation();
+			SpriteEffects bossHeadSpriteEffects3 = npc[num110].GetBossHeadSpriteEffects();
+			Vector2 vector3 = npc[num110].Center + new Vector2(0f, npc[num110].gfxOffY);
+			if (npc[num110].type == 134) {
+				Vector2 center3 = npc[num110].Center;
+				int num117 = 1;
+				int num118 = (int)npc[num110].ai[0];
+				while (num117 < 15 && npc[num118].active && npc[num118].type >= 134 && npc[num118].type <= 136) {
+					num117++;
+					center3 += npc[num118].Center;
+					num118 = (int)npc[num118].ai[0];
+				}
+
+				center3 /= (float)num117;
+				vector3 = center3;
+			}
+
+			int bossHeadTextureIndex3 = npc[num110].GetBossHeadTextureIndex();
+			float num119 = vector3.X / 16f * num5;
+			float num120 = vector3.Y / 16f * num5;
+			num119 += num;
+			num120 += num2;
+			num119 -= 10f * num5;
+			num120 -= 10f * num5;
+			DrawNPCHeadBoss(npc[num110], b, num109, bossHeadRotation3, bossHeadSpriteEffects3, bossHeadTextureIndex3, num119, num120);
+			float num121 = num119 - (float)(TextureAssets.NpcHeadBoss[bossHeadTextureIndex3].Width() / 2) * num109;
+			float num122 = num120 - (float)(TextureAssets.NpcHeadBoss[bossHeadTextureIndex3].Height() / 2) * num109;
+			float num123 = num121 + (float)TextureAssets.NpcHeadBoss[bossHeadTextureIndex3].Width() * num109;
+			float num124 = num122 + (float)TextureAssets.NpcHeadBoss[bossHeadTextureIndex3].Height() * num109;
+			if ((float)mouseX >= num121 && (float)mouseX <= num123 && (float)mouseY >= num122 && (float)mouseY <= num124)
+				text = npc[num110].GivenOrTypeName;
+		}
+	}
+
+	internal void DrawMap_OverlayNPCHeads(ref MapOverlayDrawContext context, ref string text)
+	{
+		float num = context.MapOffset.X + 10 * context.MapScale;
+		float num2 = context.MapOffset.Y + 10 * context.MapScale;
+		float num5 = context.MapScale;
+		float num53 = context.DrawScale;
+		byte b = (byte)(255f * mapMinimapAlpha);
+		var transformMatrix = Matrix.Identity;
+
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix);
+		try {
+			for (int m = 0; m < 200; m++) {
+				if (npc[m].active && npc[m].townNPC) {
+					int headIndexSafe = TownNPCProfiles.GetHeadIndexSafe(npc[m]);
+					if (headIndexSafe > 0) {
+						SpriteEffects dir = SpriteEffects.None;
+						if (npc[m].direction > 0)
+							dir = SpriteEffects.FlipHorizontally;
+
+						float num54 = (npc[m].position.X + (float)(npc[m].width / 2)) / 16f * num5;
+						float num55 = (npc[m].position.Y + (float)(npc[m].height / 2)) / 16f * num5;
+						num54 += num;
+						num55 += num2;
+						num54 -= 10f * num5;
+						num55 -= 10f * num5;
+						DrawNPCHeadFriendly(npc[m], b, num53, dir, headIndexSafe, num54, num55);
+					}
+				}
+
+				if (!npc[m].active || npc[m].GetBossHeadTextureIndex() == -1)
+					continue;
+
+				float bossHeadRotation = npc[m].GetBossHeadRotation();
+				SpriteEffects bossHeadSpriteEffects = npc[m].GetBossHeadSpriteEffects();
+				Vector2 vector = npc[m].Center + new Vector2(0f, npc[m].gfxOffY);
+				if (npc[m].type == 134) {
+					Vector2 center = npc[m].Center;
+					int num56 = 1;
+					int num57 = (int)npc[m].ai[0];
+					while (num56 < 15 && npc[num57].active && npc[num57].type >= 134 && npc[num57].type <= 136) {
+						num56++;
+						center += npc[num57].Center;
+						num57 = (int)npc[num57].ai[0];
+					}
+
+					center /= (float)num56;
+					vector = center;
+				}
+
+				int bossHeadTextureIndex = npc[m].GetBossHeadTextureIndex();
+				float num58 = vector.X / 16f * num5;
+				float num59 = vector.Y / 16f * num5;
+				num58 += num;
+				num59 += num2;
+				num58 -= 10f * num5;
+				num59 -= 10f * num5;
+				DrawNPCHeadBoss(npc[m], b, num53, bossHeadRotation, bossHeadSpriteEffects, bossHeadTextureIndex, num58, num59);
+			}
+		}
+		catch (Exception e2) {
+			TimeLogger.DrawException(e2);
+		}
+	}
+
+	internal void DrawMap_MiniMapNPCHeads(ref MapOverlayDrawContext context, ref string text)
+	{
+		float num3 = context.ClippingRectangle.Value.X;
+		float num4 = context.ClippingRectangle.Value.Y;
+		float num5 = context.MapScale;
+		float num11 = context.MapOffset.X - num3;
+		float num12 = context.MapOffset.Y - num4;
+		float num13 = context.MapPosition.X;
+		float num14 = context.MapPosition.Y;
+		float num62 = context.DrawScale;
+		byte b = (byte)(255f * mapMinimapAlpha);
+		var transformMatrix2 = UIScaleMatrix * Matrix.CreateScale(MapScale);
+
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
+		for (int num63 = 0; num63 < 200; num63++) {
+			if (npc[num63].active && npc[num63].townNPC) {
+				int headIndexSafe2 = TownNPCProfiles.GetHeadIndexSafe(npc[num63]);
+				if (headIndexSafe2 > 0) {
+					SpriteEffects dir2 = SpriteEffects.None;
+					if (npc[num63].direction > 0)
+						dir2 = SpriteEffects.FlipHorizontally;
+
+					float num64 = ((npc[num63].position.X + (float)npc[num63].width / 2f) / 16f - num13) * num5;
+					float num65 = ((npc[num63].position.Y + npc[num63].gfxOffY + (float)npc[num63].height / 2f) / 16f - num14) * num5;
+					num64 += num3;
+					num65 += num4;
+					num65 -= 2f * num5 / 5f;
+					num64 += num11;
+					num65 += num12;
+					if (num64 > (float)(miniMapX + 12) && num64 < (float)(miniMapX + miniMapWidth - 16) && num65 > (float)(miniMapY + 10) && num65 < (float)(miniMapY + miniMapHeight - 14)) {
+						float num66 = num64 - (float)(TextureAssets.NpcHead[headIndexSafe2].Width() / 2) * num62;
+						float num67 = num65 - (float)(TextureAssets.NpcHead[headIndexSafe2].Height() / 2) * num62;
+						float num68 = num66 + (float)TextureAssets.NpcHead[headIndexSafe2].Width() * num62;
+						float num69 = num67 + (float)TextureAssets.NpcHead[headIndexSafe2].Height() * num62;
+						if ((float)mouseX >= num66 && (float)mouseX <= num68 && (float)mouseY >= num67 && (float)mouseY <= num69)
+							text = npc[num63].FullName;
+
+						DrawNPCHeadFriendly(npc[num63], b, num62, dir2, headIndexSafe2, num64, num65);
+					}
+				}
+			}
+
+			if (!npc[num63].active || npc[num63].GetBossHeadTextureIndex() == -1)
+				continue;
+
+			float bossHeadRotation2 = npc[num63].GetBossHeadRotation();
+			SpriteEffects bossHeadSpriteEffects2 = npc[num63].GetBossHeadSpriteEffects();
+			Vector2 vector2 = npc[num63].Center + new Vector2(0f, npc[num63].gfxOffY);
+			if (npc[num63].type == 134) {
+				Vector2 center2 = npc[num63].Center;
+				int num70 = 1;
+				int num71 = (int)npc[num63].ai[0];
+				while (num70 < 15 && npc[num71].active && npc[num71].type >= 134 && npc[num71].type <= 136) {
+					num70++;
+					center2 += npc[num71].Center;
+					num71 = (int)npc[num71].ai[0];
+				}
+
+				center2 /= (float)num70;
+				vector2 = center2;
+			}
+
+			int bossHeadTextureIndex2 = npc[num63].GetBossHeadTextureIndex();
+			float num72 = (vector2.X / 16f - num13) * num5;
+			float num73 = (vector2.Y / 16f - num14) * num5;
+			num72 += num3;
+			num73 += num4;
+			num73 -= 2f * num5 / 5f;
+			num72 += num11;
+			num73 += num12;
+			if (num72 > (float)(miniMapX + 12) && num72 < (float)(miniMapX + miniMapWidth - 16) && num73 > (float)(miniMapY + 10) && num73 < (float)(miniMapY + miniMapHeight - 14)) {
+				float num74 = num72 - (float)(TextureAssets.NpcHeadBoss[bossHeadTextureIndex2].Width() / 2) * num62;
+				float num75 = num73 - (float)(TextureAssets.NpcHeadBoss[bossHeadTextureIndex2].Height() / 2) * num62;
+				float num76 = num74 + (float)TextureAssets.NpcHeadBoss[bossHeadTextureIndex2].Width() * num62;
+				float num77 = num75 + (float)TextureAssets.NpcHeadBoss[bossHeadTextureIndex2].Height() * num62;
+				if ((float)mouseX >= num74 && (float)mouseX <= num76 && (float)mouseY >= num75 && (float)mouseY <= num77)
+					text = npc[num63].GivenOrTypeName;
+
+				DrawNPCHeadBoss(npc[num63], b, num62, bossHeadRotation2, bossHeadSpriteEffects2, bossHeadTextureIndex2, num72, num73);
+			}
+		}
+	}
 
 	//Mirrors code used in UpdateTime
 	/// <summary>
