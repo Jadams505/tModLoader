@@ -522,7 +522,7 @@ public partial class Main
 		float num2 = context.MapOffset.Y + 10 * context.MapScale;
 		float num5 = context.MapScale;
 		float num53 = context.DrawScale;
-		byte b = (byte)(255f * mapMinimapAlpha);
+		byte b = (byte)(255f * mapOverlayAlpha);
 		var transformMatrix = Matrix.Identity;
 
 		spriteBatch.End();

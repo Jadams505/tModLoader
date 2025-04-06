@@ -6248,55 +6248,69 @@
  			if (!((float)((k + 1) * textureMaxWidth) > num7) || !((float)(k * textureMaxWidth) < num7 + num9))
  				continue;
  
-@@ -45963,6 +_,7 @@
+@@ -45962,6 +_,7 @@
+ 				num53 *= UIScale;
  				MapIcons.Draw(Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
  				revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
++				/* START OVERLAY NPC HEADS
  				DrawMiscMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
-+				/*
  				spriteBatch.End();
  				if (revengeMarker != null) {
- 					spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, uIScaleMatrix);
-@@ -46029,6 +_,7 @@
+@@ -46029,7 +_,8 @@
  				catch (Exception e2) {
  					TimeLogger.DrawException(e2);
  				}
-+				*/
- 
+-
++				END OVERLAY NPC HEADS */
++				/* START OVERLAY PLAYER HEAD
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix);
+ 				for (int n = 0; n < 255; n++) {
+@@ -46047,9 +_,9 @@
+ 						MapPlayerRenderer.DrawPlayerHead(Camera, player[n], new Vector2(num60, num61), (float)(int)b / 255f, num53, playerHeadBordersColor);
+ 					}
+ 				}
+-
+ 				spriteBatch.End();
+ 				spriteBatch.Begin();
++				END OVERLAY PLAYER HEAD */
+ 			}
+ 
+ 			if (mapStyle == 1) {
 @@ -46059,6 +_,7 @@
  
  				MapIcons.Draw(new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
  				revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
-+				/*
++				/* START MINIMAP NPC HEADS
  				DrawMiscMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
-@@ -46129,6 +_,7 @@
+@@ -46129,7 +_,8 @@
  						DrawNPCHeadBoss(npc[num63], b, num62, bossHeadRotation2, bossHeadSpriteEffects2, bossHeadTextureIndex2, num72, num73);
  					}
  				}
-+				*/
- 
+-
++				END MINIMAP NPC HEADS */
++				/* START MINIMAP PLAYER HEAD
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
-@@ -46157,7 +_,7 @@
+ 				for (int num78 = 0; num78 < 255; num78++) {
+@@ -46157,7 +_,6 @@
  								text = player[num78].name;
  						}
  					}
 -
-+					/* START MINIMAP DEATH MARKERS
  					if (!player[num78].showLastDeath)
  						continue;
  
-@@ -46179,6 +_,7 @@
- 						if ((float)mouseX >= num85 && (float)mouseX <= num87 && (float)mouseY >= num86 && (float)mouseY <= num88)
+@@ -46180,6 +_,7 @@
  							num20 = num78;
  					}
-+					END MINIMAP DEATH MARKERS */
  				}
++				END MINIMAP DEATH MARKERS */
  
  				spriteBatch.End();
+ 				spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
 @@ -46281,6 +_,7 @@
  					}
  				}
@@ -6323,29 +6337,39 @@
  			num109 = UIScale;
 +			
  			revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
-+			/*
++			/* START FULLSCREEN NPC HEADS
  			DrawMiscMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
  			spriteBatch.End();
  			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-@@ -46367,8 +_,10 @@
- 				if ((float)mouseX >= num121 && (float)mouseX <= num123 && (float)mouseY >= num122 && (float)mouseY <= num124)
- 					text = npc[num110].GivenOrTypeName;
+@@ -46369,6 +_,8 @@
  			}
-+			*/
  
  			bool flag3 = false;
++			END FULLSREEN NPC HEADS */
 +			/* START FULLSCREEN DEATH MARKERS
  			spriteBatch.End();
  			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
  			for (int num125 = 0; num125 < 255; num125++) {
-@@ -46387,6 +_,7 @@
+@@ -46387,7 +_,8 @@
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
  			}
+-
 +			END FULLSCREEN DEATH MARKERS */
- 
++			/* START FULLSCREEN PLAYER HEAD
  			for (int num126 = 0; num126 < 255; num126++) {
  				if (!player[num126].active || ((player[myPlayer].hostile || player[num126].hostile) && (player[myPlayer].team != player[num126].team || player[num126].team == 0) && num126 != myPlayer))
+ 					continue;
+@@ -46436,6 +_,9 @@
+ 			MapIcons.Draw(Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
+ 			if (!flag3 && unityMouseOver)
+ 				unityMouseOver = false;
++			END FULLSCREEN PLAYER HEAD */
++			// TML: Moved below since unityMouseOver is now reset by PlayerHeadsMapLayer
++			MapIcons.Draw(Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
+ 
+ 			spriteBatch.End();
+ 			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerStateForCursor, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, UIScaleMatrix);
 @@ -46458,6 +_,9 @@
  			}
  

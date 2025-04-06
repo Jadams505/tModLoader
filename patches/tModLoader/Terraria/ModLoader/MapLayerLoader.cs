@@ -14,6 +14,7 @@ public static class MapLayerLoader
 		IMapLayer.PotionOfReturn,
 		IMapLayer.NPCHeads,
 		IMapLayer.DeathMarkers,
+		IMapLayer.PlayerHeads,
 		IMapLayer.Spawn,
 		IMapLayer.Pylons,
 		IMapLayer.Pings
