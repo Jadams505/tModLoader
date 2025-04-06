@@ -13,6 +13,7 @@ public static class MapLayerLoader
 		IMapLayer.GolfBall,
 		IMapLayer.PotionOfReturn,
 		IMapLayer.NPCHeads,
+		IMapLayer.DeathMarkers,
 		IMapLayer.Spawn,
 		IMapLayer.Pylons,
 		IMapLayer.Pings

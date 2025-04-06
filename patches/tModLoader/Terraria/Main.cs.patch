@@ -6264,14 +6264,14 @@
  
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix);
-@@ -46060,6 +_,7 @@
+@@ -46059,6 +_,7 @@
+ 
  				MapIcons.Draw(new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
  				revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
- 				DrawMiscMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
 +				/*
+ 				DrawMiscMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
- 				for (int num63 = 0; num63 < 200; num63++) {
 @@ -46129,6 +_,7 @@
  						DrawNPCHeadBoss(npc[num63], b, num62, bossHeadRotation2, bossHeadSpriteEffects2, bossHeadTextureIndex2, num72, num73);
  					}
@@ -6280,6 +6280,23 @@
  
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
+@@ -46157,7 +_,7 @@
+ 								text = player[num78].name;
+ 						}
+ 					}
+-
++					/* START MINIMAP DEATH MARKERS
+ 					if (!player[num78].showLastDeath)
+ 						continue;
+ 
+@@ -46179,6 +_,7 @@
+ 						if ((float)mouseX >= num85 && (float)mouseX <= num87 && (float)mouseY >= num86 && (float)mouseY <= num88)
+ 							num20 = num78;
+ 					}
++					END MINIMAP DEATH MARKERS */
+ 				}
+ 
+ 				spriteBatch.End();
 @@ -46281,6 +_,7 @@
  					}
  				}
@@ -6310,14 +6327,25 @@
  			DrawMiscMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
  			spriteBatch.End();
  			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-@@ -46367,6 +_,7 @@
+@@ -46367,8 +_,10 @@
  				if ((float)mouseX >= num121 && (float)mouseX <= num123 && (float)mouseY >= num122 && (float)mouseY <= num124)
  					text = npc[num110].GivenOrTypeName;
  			}
 +			*/
  
  			bool flag3 = false;
++			/* START FULLSCREEN DEATH MARKERS
  			spriteBatch.End();
+ 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+ 			for (int num125 = 0; num125 < 255; num125++) {
+@@ -46387,6 +_,7 @@
+ 				spriteBatch.End();
+ 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+ 			}
++			END FULLSCREEN DEATH MARKERS */
+ 
+ 			for (int num126 = 0; num126 < 255; num126++) {
+ 				if (!player[num126].active || ((player[myPlayer].hostile || player[num126].hostile) && (player[myPlayer].team != player[num126].team || player[num126].team == 0) && num126 != myPlayer))
 @@ -46458,6 +_,9 @@
  			}
  
