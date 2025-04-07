@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -14,6 +15,37 @@ public abstract class VanillaMapLayer : IMapLayer
 	public bool Visible { get; set; } = true;
 
 	public abstract void Draw(ref MapOverlayDrawContext context, ref string text);
+}
+
+public class RevengeMarkerLayer : VanillaMapLayer
+{
+	private CoinLossRevengeSystem.RevengeMarker _revengeMarker = null;
+
+	public override void Draw(ref MapOverlayDrawContext context, ref string text)
+	{
+		var spriteBatch = Main.spriteBatch;
+		var uIScaleMatrix = Main.UIScaleMatrix;
+		_revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, context.MapPosition, context.MapOffset, context.ClippingRectangle, context.MapScale, context.DrawScale, ref text);
+
+		// Skip hover text on the minimap since it is handled later in Main.DrawMap()
+		if (!Main.mapFullscreen && Main.mapStyle == 1)
+			return;
+
+		if (_revengeMarker != null) {
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, uIScaleMatrix);
+			_revengeMarker.UseMouseOver(spriteBatch, ref text, context.DrawScale);
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+		}
+	}
+
+	// Call this at the end of minimap drawing in Main.DrawMap() to ensure the text is drawn after the minimap frame.
+	internal void UseMouseOver(SpriteBatch spriteBatch, ref string text, float scale = 1)
+	{
+		if (Visible)
+			_revengeMarker?.UseMouseOver(spriteBatch, ref text, scale);
+	}
 }
 
 public class GolfBallMapLayer : VanillaMapLayer

@@ -4,6 +4,7 @@ namespace Terraria.Map;
 
 public partial interface IMapLayer
 {
+	public static IMapLayer RevengeMarkers { get; private set; } = new RevengeMarkerLayer();
 	public static IMapLayer GolfBall { get; private set; } = new GolfBallMapLayer();
 	public static IMapLayer PotionOfReturn { get; private set; } = new PotionOfReturnMapLayer();
 	public static IMapLayer NPCHeads { get; private set; } = new NPCHeadsMapLayer();

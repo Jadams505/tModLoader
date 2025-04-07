@@ -10,6 +10,7 @@ public static class MapLayerLoader
 	public static int MapLayerCount => MapLayers.Count;
 
 	internal static readonly List<IMapLayer> MapLayers = [
+		IMapLayer.RevengeMarkers,
 		IMapLayer.GolfBall,
 		IMapLayer.PotionOfReturn,
 		IMapLayer.NPCHeads,

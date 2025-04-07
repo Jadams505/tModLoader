@@ -6248,10 +6248,13 @@
  			if (!((float)((k + 1) * textureMaxWidth) > num7) || !((float)(k * textureMaxWidth) < num7 + num9))
  				continue;
  
-@@ -45962,6 +_,7 @@
+@@ -45961,7 +_,10 @@
+ 
  				num53 *= UIScale;
  				MapIcons.Draw(Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
++				/* OVERLAY REVENGE MARKER
  				revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
++				*/
 +				/* START OVERLAY NPC HEADS
  				DrawMiscMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num53, ref text);
  				spriteBatch.End();
@@ -6277,10 +6280,13 @@
  			}
  
  			if (mapStyle == 1) {
-@@ -46059,6 +_,7 @@
+@@ -46058,7 +_,10 @@
+ 					num62 = 1f;
  
  				MapIcons.Draw(new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
++				/* MINIMAP REVENGE MARKER
  				revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
++				*/
 +				/* START MINIMAP NPC HEADS
  				DrawMiscMapIcons(spriteBatch, new Vector2(num13, num14), new Vector2(num3 + num11, num4 + num12), new Microsoft.Xna.Framework.Rectangle(miniMapX, miniMapY, miniMapWidth, miniMapHeight), num5, num62, ref text);
  				spriteBatch.End();
@@ -6311,6 +6317,15 @@
  
  				spriteBatch.End();
  				spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, transformMatrix2);
+@@ -46193,6 +_,8 @@
+ 				else {
+ 					revengeMarker?.UseMouseOver(spriteBatch, ref text);
+ 				}
++				// TML: revengeMarker usage was replaced by RevengeMarkerLayer
++				(IMapLayer.RevengeMarkers as RevengeMarkerLayer)?.UseMouseOver(spriteBatch, ref text);
+ 			}
+ 		}
+ 
 @@ -46281,6 +_,7 @@
  					}
  				}
@@ -6331,12 +6346,14 @@
  				}
  			}
  
-@@ -46303,7 +_,9 @@
+@@ -46303,7 +_,11 @@
  
  			num109 = 1f;
  			num109 = UIScale;
-+			
++
++			/* START FULLSCREEN REVENGE MARKER
  			revengeMarker = NPC.RevengeManager.DrawMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
++			END FULLSCREEN REVENGE MARKER */
 +			/* START FULLSCREEN NPC HEADS
  			DrawMiscMapIcons(spriteBatch, Vector2.Zero, new Vector2(num - 10f * num5, num2 - 10f * num5), null, num5, num109, ref text);
  			spriteBatch.End();
