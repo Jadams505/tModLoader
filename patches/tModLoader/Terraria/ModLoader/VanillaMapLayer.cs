@@ -69,12 +69,7 @@ public class NPCHeadsMapLayer : VanillaMapLayer
 {
 	public override void Draw(ref MapOverlayDrawContext context, ref string text)
 	{
-		if (Main.mapFullscreen)
-			Main.instance.DrawMap_FullscreenMapNPCHeads(ref context, ref text);
-		else if (Main.mapStyle == 1)
-			Main.instance.DrawMap_MiniMapNPCHeads(ref context, ref text);
-		else if (Main.mapStyle == 2)
-			Main.instance.DrawMap_OverlayNPCHeads(ref context, ref text);
+		Main.instance.DrawMapNPCHeads(ref context, ref text);
 	}
 }
 
