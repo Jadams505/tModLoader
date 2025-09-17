@@ -5039,6 +5039,17 @@
  					_npcIndexWhoHoldsHeadIndex[headIndexSafe] = j;
  					_npcTypesThatAlreadyDrewAHead.Add(npc[j].type);
  				}
+@@ -34043,7 +_,10 @@
+ 			UILinkPointNavigator.SetPosition(600 + num, new Vector2(num7, num8) + TextureAssets.InventoryBack.Value.Size() * 0.75f);
+ 			Texture2D value = TextureAssets.InventoryBack11.Value;
+ 			Microsoft.Xna.Framework.Color white = inventoryBack;
++			/* Limited to only 100 functional slots because 700+ starts the crafting UI
+ 			if (UILinkPointNavigator.CurrentPoint - 600 == num) {
++			*/
++			if (UILinkPointNavigator.CurrentPoint - 600 == num && num < 100) {
+ 				value = TextureAssets.InventoryBack14.Value;
+ 				white = Microsoft.Xna.Framework.Color.White;
+ 			}
 @@ -34097,7 +_,7 @@
  		else {
  			text = Lang.inter[21].Value + " " + guideItem.Name;
