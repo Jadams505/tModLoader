@@ -14,9 +14,9 @@
  			return PlayerInput.BuildCommand(Lang.misc[56].Value, false, PlayerInput.ProfileGamepadUI.KeyStatus["Inventory"]) + PlayerInput.BuildCommand(Lang.misc[64].Value, false, PlayerInput.ProfileGamepadUI.KeyStatus["HotbarMinus"], PlayerInput.ProfileGamepadUI.KeyStatus["HotbarPlus"]) + PlayerInput.BuildCommand(Lang.misc[70].Value, false, PlayerInput.ProfileGamepadUI.KeyStatus["Grapple"]) + PlayerInput.BuildCommand(Lang.misc[69].Value, false, PlayerInput.ProfileGamepadUI.KeyStatus["SmartSelect"]) + (flag6 ? PlayerInput.BuildCommand("Evict", false, PlayerInput.ProfileGamepadUI.KeyStatus["MouseRight"]) : "");
  		};
  
-+		// TODO: document TML change. Why 650 -> 698?
++		// 650 -> 699 for ModNPC compatibility.
 -		for (int num14 = 600; num14 <= 650; num14++) {
-+		for (int num14 = 600; num14 <= 698; num14++) {
++		for (int num14 = 600; num14 <= 699; num14++) {
  			UILinkPoint value13 = new UILinkPoint(num14, enabled: true, num14 + 10, num14 - 10, num14 - 1, num14 + 1);
  			cp14.LinkMap.Add(num14, value13);
  		}
@@ -24,9 +24,9 @@
  			if (num58 == 0)
  				num58 = 100;
  
-+			//TODO: Document TML change. Why 50 -> 98?
++			// 50 -> 99 for ModNPC compatibility.
 -			for (int num59 = 0; num59 < 50; num59++) {
-+			for (int num59 = 0; num59 < 98; num59++) {
++			for (int num59 = 0; num59 < 99; num59++) {
  				cp14.LinkMap[600 + num59].Up = ((num59 % num58 == 0) ? (-1) : (600 + num59 - 1));
  				if (cp14.LinkMap[600 + num59].Up == -1) {
  					if (num59 >= num58 * 2)
